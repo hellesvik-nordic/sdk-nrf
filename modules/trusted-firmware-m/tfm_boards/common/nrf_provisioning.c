@@ -11,8 +11,6 @@
 #include "hw_unique_key.h"
 #include "nrfx_nvmc.h"
 #include <nrfx.h>
-#include <nrf_cc3xx_platform.h>
-#include <nrf_cc3xx_platform_identity_key.h>
 #include "nrf_provisioning.h"
 #include <identity_key.h>
 #include <tfm_spm_log.h>
