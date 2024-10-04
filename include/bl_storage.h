@@ -11,8 +11,10 @@
 #include <zephyr/types.h>
 #include <drivers/nrfx_common.h>
 #if defined(CONFIG_NRFX_NVMC)
+#warning "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 #include <nrfx_nvmc.h>
 #elif defined(CONFIG_NRFX_RRAMC)
+#warning "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 #include <nrfx_rramc.h>
 #else
 #error "No NRFX storage technology supported backend selected"

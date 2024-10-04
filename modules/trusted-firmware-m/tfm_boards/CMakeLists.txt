@@ -110,10 +110,14 @@ if (${TFM_PARTITION_CRYPTO})
    endif()
 
   if (${TFM_PARTITION_INITIAL_ATTESTATION})
-    target_sources(platform_s
-      PRIVATE
-        ${ZEPHYR_NRF_MODULE_DIR}/lib/identity_key/identity_key.c
-    )
+    if((NRF_SOC_VARIANT STREQUAL nrf54l15) OR (target STREQUAL nrf54l15))
+      message("TEST")
+    else()
+      target_sources(platform_s
+        PRIVATE
+          ${ZEPHYR_NRF_MODULE_DIR}/lib/identity_key/identity_key.c
+      )
+    endif()
   endif()
 
   if(EXISTS platform_cc3xx)
