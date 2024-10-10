@@ -9,6 +9,7 @@
 
 #include <string.h>
 #include <zephyr/types.h>
+#include <zephyr/autoconf.h>
 #include <drivers/nrfx_common.h>
 #if defined(CONFIG_NRFX_NVMC)
 #include <nrfx_nvmc.h>
