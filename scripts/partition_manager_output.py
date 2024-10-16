@@ -169,6 +169,10 @@ def write_gpm_config(gpm_config, regions_config, name, out_path):
                 f"'{image}' in the pm.yml file of child '{image}'.")
 
     image_config_lines.append('#define PM_ADDRESS {}'.format(hex(gpm_config[domain][pm_image]['address'])))
+    print("AAAAAAAAA")
+    print(gpm_config[domain])
+    print("AAAAAAAAA")
+    image_config_lines.append('#define PM_NAME {}'.format(str(pm_image)))
     image_config_lines.append('#define PM_SIZE {}'.format(hex(gpm_config[domain][pm_image]['size'])))
 
     image_sram_partition = f'{image}_sram'
