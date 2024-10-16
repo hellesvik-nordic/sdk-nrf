@@ -7,7 +7,9 @@ tfm_sram:
   region: sram_primary
 
 tfm:
-  placement: {before: [app]}
+  placement:
+    before: [app]
+
   size: CONFIG_PM_PARTITION_SIZE_TFM
 #ifdef CONFIG_BOOTLOADER_MCUBOOT
   inside: mcuboot_primary_app

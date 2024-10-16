@@ -26,8 +26,9 @@ extern "C" {
 #define FW_INFO_OFFSET2 0x400
 #define FW_INFO_OFFSET3 0x600
 #define FW_INFO_OFFSET4 0x800
-#define FW_INFO_OFFSET5 0x1000
-#define FW_INFO_OFFSET_COUNT 6
+#define FW_INFO_OFFSET5 0xE00
+#define FW_INFO_OFFSET6 0x1000
+#define FW_INFO_OFFSET_COUNT 7
 
 /**
  * This struct serves as a header before an EXT_API.
@@ -193,7 +194,8 @@ static inline const struct fw_info *fw_info_check(uint32_t fw_info_addr)
 static const uint32_t fw_info_allowed_offsets[] = {
 					FW_INFO_OFFSET0, FW_INFO_OFFSET1,
 					FW_INFO_OFFSET2, FW_INFO_OFFSET3,
-					FW_INFO_OFFSET4, FW_INFO_OFFSET5};
+					FW_INFO_OFFSET4, FW_INFO_OFFSET5,
+					FW_INFO_OFFSET6};
 
 
 /** Search for the firmware_info structure inside the firmware.

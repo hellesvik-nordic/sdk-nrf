@@ -12,11 +12,22 @@
 #include "tfm_plat_boot_seed.h"
 #include "tfm_plat_device_id.h"
 #include "tfm_plat_otp.h"
-#include <nrf_cc3xx_platform.h>
 #include "tfm_strnlen.h"
 #include "nrf_provisioning.h"
-#include <nrfx_nvmc.h>
 #include <bl_storage.h>
+
+#ifdef CONFIG_NRFX_NVMC
+#include <nrfx_nvmc.h>
+#endif
+#ifdef CONFIG_HAS_HW_NRF_CC3XX
+#include <nrf_cc3xx_platform.h>
+#endif
+
+
+#if defined(CONFIG_CRACEN_HW_PRESENT)
+static volatile uint8_t boot_seed_set = 0;
+static volatile uint8_t boot_seed[32];
+#endif
 
 static enum tfm_security_lifecycle_t map_bl_storage_lcs_to_tfm_slc(enum lcs lcs)
 {
@@ -122,6 +133,8 @@ enum tfm_plat_err_t tfm_attest_hal_get_profile_definition(uint32_t *size, uint8_
 
 enum tfm_plat_err_t tfm_plat_get_boot_seed(uint32_t size, uint8_t *buf)
 {
+
+#if defined(CONFIG_HAS_HW_NRF_CC3XX)
 	int nrf_err;
 
 	if (size != NRF_CC3XX_PLATFORM_TFM_BOOT_SEED_SIZE) {
@@ -134,6 +147,18 @@ enum tfm_plat_err_t tfm_plat_get_boot_seed(uint32_t size, uint8_t *buf)
 	}
 
 	return TFM_PLAT_ERR_SUCCESS;
+#elif defined(CONFIG_PSA_NEED_CRACEN_KMU_DRIVER)
+	if( !boot_seed_set) {
+		psa_generate_random(boot_seed,32);
+		boot_seed_set = 1;
+	}
+
+	memcpy(buf,boot_seed, sizeof(uint8_t) * 32);
+
+	return TFM_PLAT_ERR_SUCCESS;
+#else
+	return TFM_PLAT_ERR_SYSTEM_ERR;
+#endif
 }
 
 enum tfm_plat_err_t tfm_plat_get_implementation_id(uint32_t *size, uint8_t *buf)
