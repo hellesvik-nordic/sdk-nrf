@@ -170,6 +170,7 @@ def write_gpm_config(gpm_config, regions_config, name, out_path):
 
     image_config_lines.append('#define PM_ADDRESS {}'.format(hex(gpm_config[domain][pm_image]['address'])))
     image_config_lines.append('#define PM_SIZE {}'.format(hex(gpm_config[domain][pm_image]['size'])))
+    image_config_lines.append('#define PM_NAME {}'.format(str(pm_image)))
 
     image_sram_partition = f'{image}_sram'
     image_has_custom_sram = image_sram_partition in gpm_config[domain]
