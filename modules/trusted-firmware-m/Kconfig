@@ -152,6 +152,10 @@ endchoice
 config TFM_ATTEST_STACK_SIZE
 	hex "Attestation service stack size"
 	default 0x700
+
+config TFM_ATTEST_SIGN_MESSAGE
+	bool "Attestation service stack size"
+	default n
 endmenu
 
 # Copied from secure_fw/partitions/internal_trusted_storage/Kconfig, appended the TFM prefix
