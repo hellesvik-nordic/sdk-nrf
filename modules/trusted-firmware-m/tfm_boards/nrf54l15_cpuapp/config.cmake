@@ -13,3 +13,6 @@ include(${PLATFORM_PATH}/common/${NRF_SOC_VARIANT}/config.cmake)
 
 # Override PS_CRYPTO_KDF_ALG
 set(PS_CRYPTO_KDF_ALG                  PSA_ALG_SP800_108_COUNTER_CMAC CACHE STRING    "KDF Algorithm to use")
+
+set(CONFIG_NRFX_RRAMC                ON          CACHE BOOL      "Enable nrfx drivers for RRAMC")
+add_compile_definitions(CONFIG_NRFX_RRAMC)
